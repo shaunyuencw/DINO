@@ -128,7 +128,7 @@ python eval_linear.py \
 	--num_labels <NUM_CLASSES>
 ```
 
-## Performacne Benchmark
+## Performance Benchmark
 Experiements are done to evaluate how well the DINO model performs when given extremely limited labeled images during the downstream, graph below shows the DINO model against various common Supervised Models. Each benchmark is trained on X labeled images and ran for 100 epochs.
 
 ### Experiment 1
@@ -155,6 +155,11 @@ None as of initial commit
 ## Links to related projects
 Supervised Learning Benchmarks [[Github]](https://github.com/shaunyuencw/CV_Supervised)<br/>
 SimCLR experiment [[Github]](https://github.com/shaunyuencw/SimCLR)
+
+## Download Links to Dataset and Checkpoint Weights
+[Dataset](https://drive.google.com/file/d/16JvLoYBy6f65uCsJkbjiZWLOuV2J3hVe/view?usp=share_link)<br>
+[Model Checkpoints](https://drive.google.com/drive/folders/14Kuljh7nrNAXj_RP9fF_i0Nzcz39Wwd7?usp=share_link)
+\*Ship Experiment refers to Same Class Pretext Training
 
 ## References
 Emerging Properties in Self-Supervised Vision Transformers 

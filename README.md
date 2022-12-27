@@ -132,12 +132,12 @@ python eval_linear.py \
 Experiements are done to evaluate how well the DINO model performs when given extremely limited labeled images during the downstream, graph below shows the DINO model against various common Supervised Models. Each benchmark is trained on X labeled images and ran for 100 epochs.
 
 ### Experiment 1
-<b>Same Class Dataset<b>
+<b>Same Class Dataset</b>
 Classes for images used for pretext task are the same as for the downstream task
 ~ 16,000 images (4000 x 4 classes)
 
 ### Experiment 2
-<b>Same Domain Dataset<b>
+<b>Same Domain Dataset</b>
 Images used for pretext task are the in the same category but not the target classes as for the downstream task
 ~ 77,000 images across 14 seperate classes
 
@@ -148,10 +148,6 @@ When graphing the UMAP of the pretext trained model, it is observed that there i
 ![Outlier Examples](images/DINO_outliers.jpg)
 ![DINO UMAP](images/DINO_umap.jpg)
 
-
-## Known isseus (Work in Progress)
-None as of initial commit
-
 ## Links to related projects
 Supervised Learning Benchmarks [[Github]](https://github.com/shaunyuencw/CV_Supervised)<br/>
 SimCLR experiment [[Github]](https://github.com/shaunyuencw/SimCLR)
@@ -159,8 +155,43 @@ SimCLR experiment [[Github]](https://github.com/shaunyuencw/SimCLR)
 ## Download Links to Dataset and Checkpoint Weights
 [Dataset](https://drive.google.com/file/d/16JvLoYBy6f65uCsJkbjiZWLOuV2J3hVe/view?usp=share_link)<br>
 [Model Checkpoints](https://drive.google.com/drive/folders/14Kuljh7nrNAXj_RP9fF_i0Nzcz39Wwd7?usp=share_link)
-\*Ship Experiment refers to Same Class Pretext Training
+\* Ship Experiment refers to Same Class Pretext Training
+
+## Instructions to split the Dataset (Example shown below is for 14 pretext to 4 downstream aka Same Domain)
+### Pretext Data (Change the following values)
+```Python
+BASE_FOLDER = f"ship_spotting"
+
+# Everything except stated classes
+CLASSES = [f.name for f in os.scandir(BASE_FOLDER) if f.is_dir()]
+CLASSES_TO_EXLCUDE = ['ContainerShip', 'Cruise', 'Tanker', 'Warship'] 
+CLASSES_TO_INCLUDE = [CLASS for CLASS in CLASSES if CLASS not in CLASSES_TO_EXCLUDE]
+
+# Manually Select Classes
+# CLASSES_TO_INCLUDE = [] 
+
+DATASET_PERCENTAGE = 1 # If you want to use a smaller scaled one, can set between 0 - 1
+IS_SPLIT = False
+PERCENTAGE = True
+NEW_DATASET_NAME = "pretext"
+```
+
+### Downstream Data (Change the following values)
+```Python
+NEW_DATASET_NAME = "ship_experiment"
+CLASSES_TO_INCLUDE = ['ContainerShip', 'Cruise', 'Tanker', 'Warship']
+IS_SPLIT = True # End folder will be split into train and val
+PERCENTAGE = False
+NUM_TRAIN = 4000 # Number of training images
+NUM_VAL = 500 # Number of validation images
+TRAIN_VAL_SPLIT = [0.78, 0.22] # Ensure that 2nd percentage of the dataset is > NUM_VAL
+```
+
+Finally, move the pretext folder generator into your <u> new dataset </u>
 
 ## References
 Emerging Properties in Self-Supervised Vision Transformers 
 [[arXix]](https://arxiv.org/abs/2104.14294) [[Github]](https://github.com/facebookresearch/dino)
+
+## Known isseus (Work in Progress)
+* Data Splitting script may have some error handling issue, was intended for personal use only. Will refactor to support other uses soon.

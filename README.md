@@ -117,7 +117,7 @@ python eval_linear.py \
 
 ### k-NN Evaluation
 ```Bash
-python eval_linear.py \
+python eval_knn.py \
 	--arch <vit_tiny / vit_small / vit_base> \
 	--pretrained_weights <PATH_TO_CHECKPOINT> \
 	--num_workers <NUM_WORKERS> \
@@ -126,6 +126,18 @@ python eval_linear.py \
 	--epochs <EPOCHS> \
 	--data_path <PATH_TO_FOLDER> \
 	--num_labels <NUM_CLASSES>
+```
+
+### Final Test Evaluation
+``` Bash
+python eval_final.py \
+	--arch <vit_tiny / vit_small / vit_base>  \
+	--num_workers <NUM_WORKERS> \
+	--batch_size_per_gpu <BATCH_SIZE> \
+	--data_path <PATH_TO_FOLDER> \
+	--num_labels <NUM_LABELS> \
+	--pretrained_weights <PATH_CHECKPOINT> \
+	--linear_weights <PATH_TO_LINEARWEIGHTS> 
 ```
 
 ## Performance Benchmark

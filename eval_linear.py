@@ -49,7 +49,7 @@ def eval_linear(args):
         embed_dim = model.fc.weight.shape[1]
         model.fc = nn.Identity()
     else:
-        print(f"Unknow architecture: {args.arch}")
+        print(f"Unknown architecture: {args.arch}")
         sys.exit(1)
     model.cuda()
     model.eval()
